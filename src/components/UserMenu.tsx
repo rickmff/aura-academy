@@ -1,7 +1,9 @@
-import Link from 'next/link';
+import 'server-only';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
-import UserMenuClient from '@/components/UserMenuClient';
 import { getDictionary, getLocaleFromCookies, translate as t } from '@/i18n';
+import UserMenuHydrated from '@/components/UserMenuHydrated';
+
+export const dynamic = 'force-dynamic';
 
 export default async function UserMenu() {
   const supabase = await createSupabaseServerClient();
@@ -12,18 +14,11 @@ export default async function UserMenu() {
   const locale = await getLocaleFromCookies();
   const dict = getDictionary(locale);
 
-  if (!user) {
-    return (
-      <Link href="/signin" className="text-sm underline">
-        {t(dict, 'auth.signIn')}
-      </Link>
-    );
-  }
+  const initialEmail = user?.email ?? null;
 
-  const email = user.email ?? 'conta';
   return (
-    <UserMenuClient
-      email={email}
+    <UserMenuHydrated
+      initialEmail={initialEmail}
       labels={{
         theme: t(dict, 'preferences.theme'),
         themeLight: t(dict, 'preferences.theme.light'),
@@ -36,6 +31,7 @@ export default async function UserMenu() {
         langFr: t(dict, 'language.french'),
         settings: t(dict, 'nav.settings'),
         signOut: t(dict, 'nav.signOut'),
+        signIn: t(dict, 'auth.signIn'),
       }}
     />
   );

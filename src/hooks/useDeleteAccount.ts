@@ -12,8 +12,9 @@ export function useDeleteAccount() {
     startTransition(async () => {
       try {
         await action();
-      } catch (e: any) {
-        setError(e?.message ?? 'Erro ao excluir a conta');
+      } catch (e: unknown) {
+        const message = e instanceof Error ? e.message : 'Erro ao excluir a conta';
+        setError(message);
       }
     });
   }, []);

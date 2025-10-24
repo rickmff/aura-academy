@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/components/providers/query-provider";
+import Link from 'next/link';
 import UserMenu from "@/components/UserMenu";
 import { cookies } from 'next/headers';
+import FlashToastClient from '@/components/FlashToastClient';
+import AuthListener from '@/components/AuthListener';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -52,13 +55,25 @@ export default async function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <QueryProvider>
+          <AuthListener />
           <header className="border-b">
             <div className="mx-auto max-w-5xl px-4 h-14 flex items-center justify-between">
-              <a href="/" className="font-semibold">Aura Academy</a>
+              <Link href="/" className="font-semibold">Aura Academy</Link>
               <UserMenu />
             </div>
           </header>
           {children}
+          {/* Flash toast based on cookie, then clear cookie */}
+          {(() => {
+            const flash = cookieStore.get('flash')?.value;
+            if (!flash) return null;
+            try {
+              const data = JSON.parse(flash);
+              return <FlashToastClient title={data.title} description={data.description} />;
+            } catch {
+              return null;
+            }
+          })()}
         </QueryProvider>
       </body>
     </html>

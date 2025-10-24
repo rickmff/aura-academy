@@ -27,7 +27,8 @@ function SignInContent() {
       setLoading(false);
       return;
     }
-    router.push(redirectTo);
+    // Navigate quickly; header now updates via client hydration
+    router.replace(redirectTo);
   }
 
   return (

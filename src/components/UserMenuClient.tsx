@@ -11,7 +11,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { setLocaleAction, setThemeAction } from '@/server/actions/preferences';
 
 export default function UserMenuClient({ email, labels }: {
   email: string; labels?: {
@@ -32,8 +31,9 @@ export default function UserMenuClient({ email, labels }: {
 
   return (
     <DropdownMenu>
+      <form id="signout-form" action={signOutAction} className="hidden"></form>
       <DropdownMenuTrigger asChild>
-        <button type="button" className="list-none cursor-pointer select-none inline-flex items-center gap-2">
+        <button type="button" className="list-none cursor-pointer select-none inline-flex items-center gap-2 outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0">
           <span className="hidden sm:inline text-sm text-foreground/80 max-w-[180px] truncate">{email}</span>
           <span className="rounded-full bg-foreground text-background w-8 h-8 inline-flex items-center justify-center">
             {initials}
@@ -48,11 +48,15 @@ export default function UserMenuClient({ email, labels }: {
             <span className="block w-full text-left">{labels?.settings ?? 'Settings'}</span>
           </DropdownMenuItem>
         </Link>
-        <form action={signOutAction}>
-          <DropdownMenuItem asChild>
-            <button className="block w-full text-left">{labels?.signOut ?? 'Sign out'}</button>
-          </DropdownMenuItem>
-        </form>
+        <DropdownMenuItem
+          onSelect={(e) => {
+            e.preventDefault();
+            const form = document.getElementById('signout-form') as HTMLFormElement | null;
+            form?.requestSubmit();
+          }}
+        >
+          {labels?.signOut ?? 'Sign out'}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
