@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
-import { signOutAction } from '@/app/dashboard/actions';
+import { signOutAction } from '@/server/actions/auth';
 
 export default async function UserMenu() {
   const supabase = await createSupabaseServerClient();

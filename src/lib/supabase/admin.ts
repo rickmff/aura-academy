@@ -1,3 +1,4 @@
+import 'server-only';
 import { createClient } from '@supabase/supabase-js';
 import { clientEnv } from '@/lib/env-client';
 import { serverEnv } from '@/lib/env-server';

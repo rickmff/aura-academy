@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { deleteMyAccountAction } from '../app/dashboard/actions';
+import { deleteMyAccountAction } from '@/server/actions/auth';
+import { useDeleteAccount } from '@/hooks/useDeleteAccount';
 
 export function DeleteAccountButton() {
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useDeleteAccount();
 
   return (
     <>
