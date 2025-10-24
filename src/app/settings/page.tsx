@@ -18,7 +18,7 @@ export default async function SettingsPage() {
   if (!user) redirect('/signin?redirectTo=/settings');
 
   return (
-    <main className="mx-auto max-w-3xl p-6 space-y-6">
+    <main className="space-y-4">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold">{t(dict, 'nav.settings')}</h1>
         <Button asChild variant="outline">

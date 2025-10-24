@@ -62,8 +62,9 @@ export default async function RootLayout({
               <UserMenu />
             </div>
           </header>
-          {children}
-          {/* Flash toast based on cookie, then clear cookie */}
+          <div className="mx-auto max-w-5xl p-6 space-y-4">
+            {children}
+          </div>
           {(() => {
             const flash = cookieStore.get('flash')?.value;
             if (!flash) return null;

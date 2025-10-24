@@ -26,6 +26,15 @@ export async function setThemeAction(formData: FormData) {
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
     await supabase.auth.updateUser({ data: { theme: value } });
+    // Also persist in our own database for server-side rendering/use without hitting Supabase
+    try {
+      const { db } = await import('@/db/client');
+      const { users } = await import('@/db/schema');
+      const { eq } = await import('drizzle-orm');
+      await db.update(users).set({ theme: value }).where(eq(users.id, user.id));
+    } catch {
+      // best-effort; ignore DB error to not block preference change
+    }
   }
 }
 
@@ -44,6 +53,14 @@ export async function setLocaleAction(formData: FormData) {
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
     await supabase.auth.updateUser({ data: { locale: value } });
+    try {
+      const { db } = await import('@/db/client');
+      const { users } = await import('@/db/schema');
+      const { eq } = await import('drizzle-orm');
+      await db.update(users).set({ locale: value }).where(eq(users.id, user.id));
+    } catch {
+      // best-effort
+    }
   }
 }
 

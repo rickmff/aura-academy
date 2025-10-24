@@ -7,6 +7,8 @@ export const users = pgTable('users', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   fullName: text('full_name'),
   avatarUrl: text('avatar_url'),
+  theme: text('theme'),
+  locale: text('locale'),
 });
 
 

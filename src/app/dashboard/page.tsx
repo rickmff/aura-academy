@@ -20,12 +20,14 @@ export default async function DashboardPage() {
     email: user.email ?? '',
     fullName: user.user_metadata?.full_name ?? null,
     avatarUrl: user.user_metadata?.avatar_url ?? null,
+    theme: (user.user_metadata?.theme as 'light' | 'dark' | 'system' | undefined) ?? null,
+    locale: (user.user_metadata?.locale as 'en' | 'pt' | 'es' | 'fr' | undefined) ?? null,
   });
 
   const locale = await getLocaleFromCookies();
   const dict = getDictionary(locale);
   return (
-    <main className="mx-auto max-w-3xl p-6 space-y-4">
+    <main className="space-y-4">
       <h1 className="text-3xl font-semibold">{t(dict, 'dashboard.title')}</h1>
       <p className="text-foreground/70">{t(dict, 'dashboard.welcome', { email: user?.email ?? '' })}</p>
     </main>
