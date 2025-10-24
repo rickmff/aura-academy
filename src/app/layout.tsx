@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/components/providers/query-provider";
+import UserMenu from "@/components/UserMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <header className="border-b">
+            <div className="mx-auto max-w-5xl px-4 h-14 flex items-center justify-between">
+              <a href="/" className="font-semibold">Aura Academy</a>
+              <UserMenu />
+            </div>
+          </header>
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

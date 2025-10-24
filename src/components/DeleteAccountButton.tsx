@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { deleteMyAccountAction } from './actions';
+import { deleteMyAccountAction } from '../app/dashboard/actions';
 
 export function DeleteAccountButton() {
   const [open, setOpen] = useState(false);

@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 import { ensureUserRecord } from '@/lib/users';
 import { signOutAction } from './actions';
-import { DeleteAccountButton } from './DeleteAccountButton';
+import { DeleteAccountButton } from '../../components/DeleteAccountButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,9 +24,9 @@ export default async function DashboardPage() {
   });
 
   return (
-    <main className="mx-auto max-w-3xl p-6 space-y-2">
-      <h1 className="text-2xl font-semibold">Dashboard</h1>
-      <p>Bem-vindo, {user?.email}</p>
+    <main className="mx-auto max-w-3xl p-6 space-y-4">
+      <h1 className="text-3xl font-semibold">Dashboard</h1>
+      <p className="text-foreground/70">Bem-vindo, {user?.email}</p>
       <form action={signOutAction}>
         <button className="mt-4 rounded-md border px-3 py-2">Sair</button>
       </form>
