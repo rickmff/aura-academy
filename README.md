@@ -23,7 +23,7 @@ npm run dev
 
 ## Documentation for AI Agents and Developers
 
-Consulte `docs/AI_GUIDE.md` para arquitetura, padrões e como evoluir o projeto seguindo as melhores práticas.
+Consulte `docs/AI_GUIDE.md` para arquitetura e visão geral, e siga estritamente `docs/AI_STANDARDS.md` como referência normativa de padrões e fluxos do projeto.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

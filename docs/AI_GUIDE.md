@@ -24,6 +24,7 @@ Este documento fornece contexto arquitetural e padrões para agentes de IA e des
   - `src/db/client.ts`: cliente do banco via `drizzle-orm/node-postgres`
 - `src/middleware`: middlewares server-side reutilizáveis (ex.: `requireAuth`)
 - `docs`: documentação (este guia)
+  - `docs/AI_STANDARDS.md`: referência normativa. Sempre siga este arquivo primeiro.
 
 ## Variáveis de Ambiente
 Defina um `.env` (ou `.env.local`) com:

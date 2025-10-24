@@ -13,12 +13,12 @@ export default async function MarketingPage() {
           <h1 className="text-4xl font-bold tracking-tight">{t(dict, 'app.name')}</h1>
           <p className="text-foreground/70">{t(dict, 'marketing.subtitle')}</p>
           <div className="flex gap-3">
-            <Link href="/signin">
-              <Button>{t(dict, 'auth.signIn')}</Button>
-            </Link>
-            <Link href="/dashboard">
-              <Button variant="outline">{t(dict, 'nav.dashboard')}</Button>
-            </Link>
+            <Button asChild>
+              <Link href="/signin">{t(dict, 'auth.signIn')}</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/dashboard">{t(dict, 'nav.dashboard')}</Link>
+            </Button>
           </div>
         </CardContent>
       </Card>

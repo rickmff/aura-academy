@@ -43,11 +43,11 @@ export default function UserMenuClient({ email, labels }: {
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="truncate">{email}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href="/settings">
-          <DropdownMenuItem asChild>
-            <span className="block w-full text-left">{labels?.settings ?? 'Settings'}</span>
-          </DropdownMenuItem>
-        </Link>
+        <DropdownMenuItem asChild>
+          <Link href="/settings" className="block w-full text-left">
+            {labels?.settings ?? 'Settings'}
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem
           onSelect={(e) => {
             e.preventDefault();

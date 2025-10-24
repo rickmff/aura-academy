@@ -9,13 +9,19 @@ export async function ensureUserRecord(params: {
   avatarUrl?: string | null;
 }) {
   const { id, email, fullName, avatarUrl } = params;
-  const existing = await db.select().from(users).where(eq(users.id, id)).limit(1);
-  if (existing.length > 0) return existing[0];
-  const inserted = await db
+  const result = await db
     .insert(users)
     .values({ id, email, fullName: fullName ?? undefined, avatarUrl: avatarUrl ?? undefined })
+    .onConflictDoUpdate({
+      target: users.id,
+      set: {
+        email,
+        fullName: fullName ?? undefined,
+        avatarUrl: avatarUrl ?? undefined,
+      },
+    })
     .returning();
-  return inserted[0];
+  return result[0];
 }
 
 
