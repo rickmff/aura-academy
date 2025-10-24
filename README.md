@@ -2,17 +2,28 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Copy environment template and fill values:
+
+```bash
+cp .env.example .env
+# then edit .env and set values
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+
+## Documentation for AI Agents and Developers
+
+Consulte `docs/AI_GUIDE.md` para arquitetura, padrões e como evoluir o projeto seguindo as melhores práticas.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
