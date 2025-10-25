@@ -15,6 +15,13 @@
       "when": 1761340915943,
       "tag": "0001_tricky_susan_delgado",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1761388285096,
+      "tag": "0002_dry_zzzax",
+      "breakpoints": true
     }
   ]
 }
