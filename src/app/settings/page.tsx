@@ -50,10 +50,50 @@ export default async function SettingsPage() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-4 gap-2">
-            <form action={setLocaleAction}><input type="hidden" name="locale" value="pt" /><button className="rounded-md border px-3 py-2 text-sm hover:bg-foreground/10 w-full" type="submit">{t(dict, 'language.portuguese')}</button></form>
-            <form action={setLocaleAction}><input type="hidden" name="locale" value="en" /><button className="rounded-md border px-3 py-2 text-sm hover:bg-foreground/10 w-full" type="submit">{t(dict, 'language.english')}</button></form>
-            <form action={setLocaleAction}><input type="hidden" name="locale" value="es" /><button className="rounded-md border px-3 py-2 text-sm hover:bg-foreground/10 w-full" type="submit">{t(dict, 'language.spanish')}</button></form>
-            <form action={setLocaleAction}><input type="hidden" name="locale" value="fr" /><button className="rounded-md border px-3 py-2 text-sm hover:bg-foreground/10 w-full" type="submit">{t(dict, 'language.french')}</button></form>
+            <form action={setLocaleAction}>
+              <input type="hidden" name="locale" value="pt" />
+              <button
+                className={`rounded-md border px-3 py-2 text-sm w-full ${locale === 'pt' ? 'text-primary border-primary cursor-default' : 'hover:bg-foreground/10'}`}
+                type="submit"
+                aria-current={locale === 'pt' ? 'true' : undefined}
+                disabled={locale === 'pt'}
+              >
+                {t(dict, 'language.portuguese')}
+              </button>
+            </form>
+            <form action={setLocaleAction}>
+              <input type="hidden" name="locale" value="en" />
+              <button
+                className={`rounded-md border px-3 py-2 text-sm w-full ${locale === 'en' ? 'text-primary border-primary cursor-default' : 'hover:bg-foreground/10'}`}
+                type="submit"
+                aria-current={locale === 'en' ? 'true' : undefined}
+                disabled={locale === 'en'}
+              >
+                {t(dict, 'language.english')}
+              </button>
+            </form>
+            <form action={setLocaleAction}>
+              <input type="hidden" name="locale" value="es" />
+              <button
+                className={`rounded-md border px-3 py-2 text-sm w-full ${locale === 'es' ? 'text-primary border-primary cursor-default' : 'hover:bg-foreground/10'}`}
+                type="submit"
+                aria-current={locale === 'es' ? 'true' : undefined}
+                disabled={locale === 'es'}
+              >
+                {t(dict, 'language.spanish')}
+              </button>
+            </form>
+            <form action={setLocaleAction}>
+              <input type="hidden" name="locale" value="fr" />
+              <button
+                className={`rounded-md border px-3 py-2 text-sm w-full ${locale === 'fr' ? 'text-primary border-primary cursor-default' : 'hover:bg-foreground/10'}`}
+                type="submit"
+                aria-current={locale === 'fr' ? 'true' : undefined}
+                disabled={locale === 'fr'}
+              >
+                {t(dict, 'language.french')}
+              </button>
+            </form>
           </div>
         </CardContent>
       </Card>

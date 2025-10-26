@@ -354,7 +354,6 @@ export function AccountEditForm({ user, labels }: AccountEditFormProps) {
                   id="email"
                   value={formData.email}
                   disabled
-                  className="bg-gray-50"
                 />
               </div>
             </div>

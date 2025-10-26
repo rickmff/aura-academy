@@ -51,6 +51,17 @@ export default function UserMenuClient({ email, labels }: {
         <DropdownMenuItem
           onSelect={(e) => {
             e.preventDefault();
+            try {
+              // Force system theme immediately to avoid light flash during sign-out navigation
+              localStorage.setItem('theme', 'system');
+              const prefersDark = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+              if (typeof document !== 'undefined') {
+                document.documentElement.classList.toggle('dark', !!prefersDark);
+                // set a client cookie right away so the next SSR load reads it before hydration
+                const maxAge = 60 * 60 * 24 * 365;
+                document.cookie = `theme=system; Path=/; Max-Age=${maxAge}; SameSite=Lax`;
+              }
+            } catch { }
             const form = document.getElementById('signout-form') as HTMLFormElement | null;
             form?.requestSubmit();
           }}

@@ -33,15 +33,6 @@ export default async function DashboardPage() {
         <h1 className="text-3xl font-semibold">{t(dict, 'dashboard.title')}</h1>
         <p className="text-foreground/70">{t(dict, 'dashboard.welcome', { email: user?.email ?? '' })}</p>
       </div>
-
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Your Account</h2>
-        <div className="space-y-2">
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Name:</strong> {user.user_metadata?.full_name || 'Not set'}</p>
-          <p><strong>Account created:</strong> {new Date(user.created_at).toLocaleDateString()}</p>
-        </div>
-      </div>
     </main>
   );
 }

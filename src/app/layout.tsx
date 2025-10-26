@@ -35,6 +35,7 @@ export default async function RootLayout({
   const noFlashScript = `
   (function(){
     try {
+      // Prefer localStorage if present, otherwise fall back to cookie, otherwise SSR-provided default
       var t = localStorage.getItem('theme');
       var c = document.cookie.match(/(?:^|; )theme=([^;]+)/);
       var theme = (t || (c && decodeURIComponent(c[1])) || '${cookieTheme || 'system'}');
