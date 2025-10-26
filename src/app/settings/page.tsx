@@ -6,6 +6,9 @@ import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { DeleteAccountButton } from '@/components/DeleteAccountButton';
 import ThemeSelector from '@/components/ThemeSelector';
+import { BillingSection } from '@/components/BillingSection';
+import { AccountEditForm } from '@/components/AccountEditForm';
+import { getUserSubscription } from '@/server/actions/stripe';
 import Link from 'next/link';
 
 export default async function SettingsPage() {
@@ -16,6 +19,8 @@ export default async function SettingsPage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect('/signin?redirectTo=/settings');
+
+  const subscription = await getUserSubscription(user.id);
 
   return (
     <main className="space-y-4">
@@ -53,12 +58,51 @@ export default async function SettingsPage() {
         </CardContent>
       </Card>
 
+      <BillingSection
+        subscription={subscription}
+        userId={user.id}
+        labels={{
+          subscription: t(dict, 'billing.subscription'),
+          manageSubscription: t(dict, 'billing.manageSubscription'),
+          noActiveSubscriptionDescription: t(dict, 'billing.noActiveSubscriptionDescription'),
+          viewPlans: t(dict, 'billing.viewPlans'),
+          status: t(dict, 'billing.status'),
+          currentPlan: t(dict, 'billing.currentPlan'),
+          active: t(dict, 'billing.active'),
+          canceled: t(dict, 'billing.canceled'),
+          pastDue: t(dict, 'billing.pastDue'),
+          incomplete: t(dict, 'billing.incomplete'),
+          incompleteExpired: t(dict, 'billing.incompleteExpired'),
+          trialing: t(dict, 'billing.trialing'),
+          unpaid: t(dict, 'billing.unpaid'),
+        }}
+      />
+
+      <AccountEditForm
+        user={user}
+        labels={{
+          editProfile: t(dict, 'account.editProfile'),
+          personalInfo: t(dict, 'account.personalInfo'),
+          fullName: t(dict, 'account.fullName'),
+          email: t(dict, 'account.email'),
+          avatar: t(dict, 'account.avatar'),
+          changeAvatar: t(dict, 'account.changeAvatar'),
+          removeAvatar: t(dict, 'account.removeAvatar'),
+          saving: t(dict, 'account.saving'),
+          confirm: t(dict, 'actions.confirm'),
+          cancel: t(dict, 'actions.cancel'),
+          profileUpdated: t(dict, 'account.profileUpdated'),
+          errorUpdatingProfile: t(dict, 'account.errorUpdatingProfile'),
+          uploading: t(dict, 'account.uploading'),
+          uploadError: t(dict, 'account.uploadError'),
+        }}
+      />
+
       <Card>
         <CardHeader>
           <CardTitle>{t(dict, 'account.section')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2">
-          <p className="text-foreground/70">{user.email}</p>
           <div className="flex gap-2">
             <Button asChild variant="outline">
               <Link href="/reset-password">{t(dict, 'account.resetPassword')}</Link>
